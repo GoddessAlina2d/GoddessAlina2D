@@ -1,28 +1,40 @@
-// pages/api/rebrand.js
+// Example for your frontend (page.tsx)
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    try {
-      // Call your external Python service here, using a fetch or axios request
-      const response = await fetch('https://account-rebrander.vercel.app', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // Add any data if needed for the rebrand (optional)
-        body: JSON.stringify({ someData: 'value' }),
-      });
+const handleRebrand = async () => {
+  try {
+    setLoading(true);
+    setMessage("");
 
-      if (!response.ok) {
-        throw new Error('Failed to trigger rebrand');
-      }
+    // Prepare your data for the rebrand
+    const name = "Alina-BOT-";
+    const bio = "@GoddessAlina2D";
+    const imagePath = "/path/to/your/image.png";  // Update with the actual image path
+    const bannerPath = "/path/to/your/banner.png";  // Update with the actual banner path
 
-      return res.status(200).json({ message: 'Rebrand initiated!' });
-    } catch (error) {
-      return res.status(500).json({ message: 'Something went wrong', error: error.message });
+    const response = await fetch('/api/rebrand', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        bio,
+        accessToken: userAccessToken, // Make sure to get the user's access token
+        accessSecret: userAccessSecret, // And the user's access secret
+        imagePath,
+        bannerPath,
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setMessage('Profile updated successfully!');
+    } else {
+      setMessage(`Error: ${data.message}`);
     }
-  } else {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+  } catch (error) {
+    setMessage(`Error: ${error.message}`);
+  } finally {
+    setLoading(false);
   }
-}
-
+};
