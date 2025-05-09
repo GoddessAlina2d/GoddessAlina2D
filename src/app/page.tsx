@@ -9,28 +9,34 @@ export default function Home() {
   const [message, setMessage] = useState("");
 
   const handleRebrand = async () => {
-    setLoading(true);
-    setMessage(""); // Clear previous message
+  setLoading(true);
+  setMessage(""); // Clear previous message
 
-    try {
-      // Send a POST request to your Next.js API route
-      const response = await fetch("/api/rebrand", {
-        method: "POST",
-      });
+  try {
+    // Send a POST request to your Next.js API route
+    const response = await fetch("/api/rebrand", {
+      method: "POST",
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
-        setMessage("Rebrand process initiated!");
-      } else {
-        setMessage(`Error: ${data.message}`);
-      }
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
+    if (response.ok) {
+      setMessage("Rebrand process initiated!");
+    } else {
+      setMessage(`Error: ${data.message}`);
     }
+  } catch (error: unknown) {
+    // Explicitly type the error as an instance of Error
+    if (error instanceof Error) {
+      setMessage(`Error: ${error.message}`);
+    } else {
+      setMessage("An unknown error occurred.");
+    }
+  }
 
-    setLoading(false);
-  };
+  setLoading(false);
+};
+
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
