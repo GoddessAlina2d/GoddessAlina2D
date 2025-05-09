@@ -38,10 +38,12 @@ export async function POST() {
 
     return NextResponse.json({ message: '✅ Rebrand complete!' });
   } catch (error) {
-  const message = error instanceof Error ? error.message : 'Unknown error';
-    console.log(message);
-    console.error('Twitter API error:', error);
+  console.error('Twitter API error:', error);
+  if (error instanceof Error) {
     return NextResponse.json({ message: '❌ Rebrand failed', error: error.message }, { status: 500 });
+  } else {
+    return NextResponse.json({ message: '❌ Rebrand failed', error: 'Unknown error' }, { status: 500 });
   }
+}
 }
 
