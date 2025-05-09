@@ -1,10 +1,10 @@
 import tweepy
+import os
 
-# Twitter app credentials (use environment variables in production)
-API_KEY = "YOUR_API_KEY"
-API_SECRET = "YOUR_API_SECRET"
-ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
-ACCESS_SECRET = "YOUR_ACCESS_SECRET"
+API_KEY = os.environ["TWITTER_API_KEY"]
+API_SECRET = os.environ["TWITTER_API_SECRET"]
+ACCESS_TOKEN = os.environ["TWITTER_ACCESS_TOKEN"]
+ACCESS_SECRET = os.environ["TWITTER_ACCESS_SECRET"]
 
 # Authenticate
 auth = tweepy.OAuth1UserHandler(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
