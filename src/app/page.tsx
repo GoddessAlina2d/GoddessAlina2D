@@ -7,22 +7,27 @@ export default function Home() {
 
   const handleRebrand = async () => {
     try {
-      setLoading(true);
-      setMessage("");
+  setLoading(true);
+  setMessage("");
 
-      const response = await fetch('/api/rebrand', { method: 'POST' });
-      const data = await response.json();
+  const response = await fetch('/api/rebrand', { method: 'POST' });
+  const data = await response.json();
 
-      if (response.ok) {
-        setMessage('Profile updated successfully!');
-      } else {
-        setMessage(`Error: ${data.message}`);
-      }
-    } catch (error: any) {
-      setMessage(`Error: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
+  if (response.ok) {
+    setMessage('Profile updated successfully!');
+  } else {
+    setMessage(`Error: ${data.message}`);
+  }
+} catch (error) {
+  if (error instanceof Error) {
+    setMessage(`Error: ${error.message}`);
+  } else {
+    setMessage("An unknown error occurred.");
+  }
+} finally {
+  setLoading(false);
+}
+
   };
 
   return (
