@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 import { TwitterApi } from 'twitter-api-v2';
+// Optional: Update profile image and banner
+import fs from 'fs';
+import path from 'path';
 
 export async function POST() {
   try {
@@ -21,9 +24,7 @@ export async function POST() {
       description: '@GoddessAlina2D',
     });
 
-    // Optional: Update profile image and banner
-    import fs from 'fs';
-    import path from 'path';
+    
 
 
     const image = fs.readFileSync(path.join(process.cwd(), 'public', 'Owned By (1).png'));
