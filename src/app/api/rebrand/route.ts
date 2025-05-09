@@ -22,8 +22,9 @@ export async function POST() {
     });
 
     // Optional: Update profile image and banner
-    const fs = require('fs');
-    const path = require('path');
+    import fs from 'fs';
+    import path from 'path';
+
 
     const image = fs.readFileSync(path.join(process.cwd(), 'public', 'Owned By (1).png'));
     const banner = fs.readFileSync(path.join(process.cwd(), 'public', 'Twitter banner.png'));
@@ -35,7 +36,9 @@ export async function POST() {
     await rwClient.v2.tweet("I'm just a clickslut for @Goddessalina2d. I couldn't stop myself from clicking. Now I'm just her billboard and slave.");
 
     return NextResponse.json({ message: '✅ Rebrand complete!' });
-  } catch (error: any) {
+  } catch (error) {
+  const message = error instanceof Error ? error.message : 'Unknown error';
+
     console.error('Twitter API error:', error);
     return NextResponse.json({ message: '❌ Rebrand failed', error: error.message }, { status: 500 });
   }
