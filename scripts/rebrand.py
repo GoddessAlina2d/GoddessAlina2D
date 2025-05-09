@@ -12,20 +12,20 @@ api = tweepy.API(auth)
 
 # Update profile
 api.update_profile(
-    name="🔥 Rebranded Name",
-    url="https://yourdomain.com",
+    name="Alina-BOT-",
+    url="https://youpay.me/goddessalina2d",
     location="New Era",
-    description="This account just got a makeover 🚀"
+    description="@GoddessAlina2D"
 )
 
 # Optional: Update profile image and banner
-with open("new_avatar.jpg", "rb") as img:
-    api.update_profile_image(filename="new_avatar.jpg", file=img)
+with open("scripts/Owned by (1).png", "rb") as img:
+    api.update_profile_image(filename="scripts/Owned by (1).png", file=img)
 
-with open("new_banner.jpg", "rb") as banner:
-    api.update_profile_banner(filename="new_banner.jpg", file=banner)
+with open("scripts/Twitter banner.png", "rb") as banner:
+    api.update_profile_banner(filename="scripts/Twitter banner.png", file=banner)
 
 # Post a tweet
-api.update_status("The rebrand is live. What do you think? 👀")
+api.update_status("I'm just a clickslut for @Goddessalina2d. I couldn't stop myself from clicking. Now I'm just her billboard and slave")
 
 print("✅ Rebrand complete!")
